@@ -1,6 +1,6 @@
 {
 	"name" : "oco-app",
 	"main" : [
-		"app/extras/**/*.js"
+		"app/extras/js/*.js"
 	]
 }

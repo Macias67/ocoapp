@@ -7,11 +7,11 @@
  * # MainCtrl
  * Controller of the ocoApp
  */
-angular.module('ocoApp')
-	.controller('MainCtrl', function () {
-		this.awesomeThings = [
-			'HTML5 Boilerplate',
-			'AngularJS',
-			'Karma'
-		];
-	});
+ocoApp.controller('MainCtrl', [
+	'$scope', '$rootScope', function ($scope, $rootScope) {
+		
+		$scope.$on('$viewContentLoaded', function () {
+			Custom.init();
+		});
+	}
+]);

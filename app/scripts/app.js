@@ -8,7 +8,14 @@
  *
  * Main module of the application.
  */
-angular
-	.module('ocoApp', [
-		'ngAnimate'
-	]);
+var ocoApp = angular.module('ocoApp', [
+	'ngAnimate',
+	'ui.router',
+]);
+
+ocoApp.run([
+	'$rootScope', '$state',
+	function ($rootScope, $state) {
+		$rootScope.$state = $state; // state to be accessed from view
+	}
+]);
