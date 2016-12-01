@@ -1,0 +1,6 @@
+{
+	"name" : "oco-app",
+	"main" : [
+		"app/extras/**/*.js"
+	]
+}
