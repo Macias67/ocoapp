@@ -10,8 +10,5 @@
 ocoApp.controller('MainCtrl', [
 	'$scope', '$rootScope', function ($scope, $rootScope) {
 		
-		$scope.$on('$viewContentLoaded', function () {
-			Custom.init();
-		});
 	}
 ]);

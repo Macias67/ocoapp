@@ -113,14 +113,15 @@ var Custom = function () {
 				window.location.hash = target;
 			});
 		});
-	};;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+	};
 	
 	/**
 	 * @TODO revisar el archivo php
 	 */
 	var handleModalAfterClick = function () {
-		$("[data-modal-external-file]").on("click", ".quick-detail", function (e) {
+		$("[data-modal-external-file], .quick-detail").on("click", function (e) {
 			e.preventDefault();
+			console.log('asdasd');
 			var modalTarget, modalFile;
 			if ($(this).closest(".item").attr("data-id")) {
 				modalTarget = $(this).closest(".item").attr("data-id");
@@ -321,11 +322,6 @@ var Custom = function () {
 		});
 	};
 	
-	equalHeight(".container");
-	ratingPassive("body");
-	bgTransfer();
-	responsiveNavigation();
-	
 	//Funciones privadas
 	
 	/**
@@ -335,14 +331,15 @@ var Custom = function () {
 	 */
 	function openModal(target, modalPath) {
 		
-		$("body").append('<div class="modal modal-external fade" id="' + target + '" tabindex="-1" role="dialog" aria-labelledby="' + target + '"><i class="loading-icon fa fa-circle-o-notch fa-spin"></i></div>');
+		$("body").append('<div class="modal modal-external fade" id="' + target + '" tabindex="-1" role="dialog" aria-labelledby="' + target + '">' +
+			'<i class="loading-icon fa fa-circle-o-notch fa-spin"></i></div>');
 		
 		$("#" + target + ".modal").on("show.bs.modal", function () {
 			var _this = $(this);
 			lastModal = _this;
 			$.ajax({
-				url    : "assets/external/" + modalPath,
-				method : "POST",
+				url    : "views/modal/" + modalPath,
+				method : "GET",
 				//dataType: "html",
 				data   : {id: target},
 				success: function (results) {
@@ -359,7 +356,6 @@ var Custom = function () {
 					else {
 						timeOutActions(_this);
 					}
-					socialShare();
 					_this.on("hidden.bs.modal", function () {
 						$(lastClickedMarker).removeClass("active");
 						$(".pac-container").remove();

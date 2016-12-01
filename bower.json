@@ -21,7 +21,8 @@
 	  "nouislider" : "^9.0.0",
 	  "masonry" : "^4.1.1",
 	  "readmore-js" : "^2.2.0",
-	  "outlayer" : "^2.1.0"
+	  "outlayer" : "^2.1.0",
+	  "angular-bootstrap" : "^2.3.0"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"

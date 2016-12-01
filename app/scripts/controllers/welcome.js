@@ -8,9 +8,14 @@
  * Controller of the ocoApp
  */
 angular.module('ocoApp')
-	.controller('WelcomeCtrl', function () {
-		var vm = this;
-		
-		vm.ciudad = "Ocotlán";
-		
-	});
+	.controller('WelcomeCtrl', [
+		'$scope', '$rootScope', function ($scope, $rootScope) {
+			
+			var vm    = this;
+			vm.ciudad = 'Ocotlán';
+			
+			$scope.$on('$viewContentLoaded', function () {
+				Custom.init();
+			});
+		}
+	]);

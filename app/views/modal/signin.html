@@ -1,0 +1,32 @@
+<div class="modal-header">
+	<button type="button" class="close" ng-click="modalSignInCtrl.close()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+	<div class="section-title">
+		<h2>Inciar Sesión</h2>
+	</div>
+</div>
+
+<div class="modal-body">
+	<form class="form inputs-underline" name="modalSignInCtrl.form" autocomplete="off">
+		<div class="form-group">
+			<label for="email">Email</label>
+			<input type="email" class="form-control" ng-model="modalSignInCtrl.credenciales.email" id="email" placeholder="Email" required>
+		</div>
+		<!--end form-group-->
+		<div class="form-group">
+			<label for="password">Contraseña</label>
+			<input type="password" class="form-control" ng-model="modalSignInCtrl.credenciales.password" id="password" placeholder="Contraseña" required>
+		</div>
+		<div class="form-group center">
+			<button type="submit" class="btn btn-primary width-100" ng-disabled="!modalSignInCtrl.form.$valid">Entrar</button>
+		</div>
+		<!--end form-group-->
+	</form>
+	
+	<hr>
+	
+	<a href="javascript:" class="text-center" ng-click="modalSignInCtrl.resetPassModal()">Olvide mi contraseña.</a>
+	<!--end form-->
+</div>
+<!--end modal-body-->

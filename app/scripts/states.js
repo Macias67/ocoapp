@@ -7,14 +7,15 @@ ocoApp.config([
 			$state.go('welcome');
 		});
 		
-		$stateProvider.state('welcome', {
-			url        : '/',
-			templateUrl: 'views/welcome.html',
-			data       : {
-				pageTitle: 'Bienvenido',
-				bodyClass: 'login'
-			},
-			controller : 'WelcomeCtrl as welcomeCtrl',
-		})
+		$stateProvider
+			.state('welcome', {
+				url        : '/',
+				templateUrl: 'views/welcome.html',
+				data       : {
+					pageTitle: 'Bienvenido',
+					bodyClass: 'login'
+				},
+				controller : 'WelcomeCtrl as welcomeCtrl',
+			})
 	}
 ]);

@@ -11,6 +11,7 @@
 var ocoApp = angular.module('ocoApp', [
 	'ngAnimate',
 	'ui.router',
+	'ui.bootstrap'
 ]);
 
 ocoApp.run([
