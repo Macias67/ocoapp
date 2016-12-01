@@ -13,7 +13,7 @@
 		<!-- bower:css -->
 		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"/>
 		<link rel="stylesheet" href="bower_components/zabuto_calendar/zabuto_calendar.css"/>
-		<link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css"/>
+		<link rel="stylesheet" href="bower_components/elegant-icons/css/style.css"/>
 		<link rel="stylesheet" href="bower_components/owl.carousel/dist/assets/owl.carousel.css"/>
 		<link rel="stylesheet" href="bower_components/trackpad-scroll-emulator/css/trackpad-scroll-emulator.css"/>
 		<link rel="stylesheet" href="bower_components/bootstrap-select/dist/css/bootstrap-select.css"/>
@@ -1309,15 +1309,21 @@
 		
 		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 		<script>
-//		!function (A, n, g, u, l, a, r) {
-//			A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
-//					(A[l].q = A[l].q || []).push(arguments)
-//				}, A[l].l = +new Date, a = n.createElement(g),
-//				r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-//		}(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-//
-//		ga('create', 'UA-XXXXX-X');
-//		ga('send', 'pageview');
+		(function (A, n, g, u, l, a, r) {
+			A['GoogleAnalyticsObject'] = l;
+			A[l] = A[l] || function () {
+					(A[l].q = A[l].q || []).push(arguments)
+				}, A[l].l = 1 * new Date();
+			a = n.createElement(g),
+				r = n.getElementsByTagName(g)[0];
+			a.async = 1;
+			a.src   = u;
+			r.parentNode.insertBefore(a, r)
+		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+		
+		ga('create', 'UA-88289538-1', 'auto');
+		ga('send', 'pageview');
+		
 		</script>
 		
 		<script src="https://use.fontawesome.com/e20efdd9a3.js"></script>

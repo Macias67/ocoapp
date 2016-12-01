@@ -13,7 +13,8 @@
     "jquery-validation": "jquery.validate#^1.13.0",
     "fitvids": "^1.2.0",
     "iCheck": "^1.0.2",
-    "google-maps-utility-library-v3": "*"
+	  "google-maps-utility-library-v3" : "*",
+	  "elegant-icons" : "*"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
@@ -31,9 +32,13 @@
     "trackpad-scroll-emulator": {
       "main": [
         "css/trackpad-scroll-emulator.css",
-        "jquery.trackpad-scroll-emulator.min.js",
-        ""
+	      "jquery.trackpad-scroll-emulator.min.js"
       ]
-    }
+    },
+	  "elegant-icons" : {
+		  "main" : [
+			  "css/style.css"
+		  ]
+	  }
   }
 }
