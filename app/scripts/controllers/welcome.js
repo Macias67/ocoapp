@@ -9,13 +9,18 @@
  */
 angular.module('ocoApp')
 	.controller('WelcomeCtrl', [
-		'$scope', '$rootScope', function ($scope, $rootScope) {
+		'$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
 			
 			var vm    = this;
 			vm.ciudad = 'Ocotlán';
 			
+			$timeout(function () {
+				
+			}, 5000);
+			
 			$scope.$on('$viewContentLoaded', function () {
 				Custom.init();
+				$rootScope.$pageOnLoad = false;
 			});
 		}
 	]);

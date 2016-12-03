@@ -2,5 +2,8 @@
 	"name" : "oco-app",
 	"main" : [
 		"app/extras/js/*.js"
+	],
+	"ignore": [
+		"app/extras/js/_custom.js"
 	]
 }

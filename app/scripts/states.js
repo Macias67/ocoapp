@@ -1,4 +1,4 @@
-ocoApp.config([
+angular.module('ocoApp').config([
 	'$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
 		
 		// Redirect any unmatched url
@@ -12,10 +12,17 @@ ocoApp.config([
 				url        : '/',
 				templateUrl: 'views/welcome.html',
 				data       : {
-					pageTitle: 'Bienvenido',
-					bodyClass: 'login'
+					pageTitle: 'Bienvenido'
 				},
 				controller : 'WelcomeCtrl as welcomeCtrl',
+			})
+			.state('place', {
+				url        : '/place',
+				templateUrl: 'views/place.html',
+				data       : {
+					pageTitle: 'Place'
+				},
+				controller : 'PlaceCtrl as placeCtrl',
 			})
 	}
 ]);

@@ -1,27 +1,27 @@
 <div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	<button type="button" class="close" ng-click="modalCreaCuentaCtrl.close()">
 		<span aria-hidden="true">&times;</span>
 	</button>
 	<div class="section-title">
-		<h2>Register</h2>
+		<h2>Nueva cuenta</h2>
 	</div>
 </div>
 
 <div class="modal-body">
-	<form class="form inputs-underline">
+	<form class="form inputs-underline" name="modalCreaCuentaCtrl.form" autocomplete="off">
 		<div class="row">
 			<div class="col-md-6 col-sm-6">
 				<div class="form-group">
-					<label for="first_name">First Name</label>
-					<input type="text" class="form-control" name="first_name" id="first_name" placeholder="First name">
+					<label for="first_name">Primer nombre</label>
+					<input type="text" class="form-control" ng-model="modalCreaCuentaCtrl.infoUser.nombre" id="first_name" placeholder="Primer nombre" required>
 				</div>
 				<!--end form-group-->
 			</div>
 			<!--end col-md-6-->
 			<div class="col-md-6 col-sm-6">
 				<div class="form-group">
-					<label for="last_name">Last Name</label>
-					<input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last name">
+					<label for="last_name">Segundo nombre</label>
+					<input type="text" class="form-control" ng-model="modalCreaCuentaCtrl.infoUser.apellido" id="last_name" placeholder="Segundo nombre" required>
 				</div>
 				<!--end form-group-->
 			</div>
@@ -30,28 +30,32 @@
 		<!--enr row-->
 		<div class="form-group">
 			<label for="email">Email</label>
-			<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+			<input type="email" class="form-control" ng-model="modalCreaCuentaCtrl.infoUser.email" id="email" placeholder="Email" required>
 		</div>
 		<!--end form-group-->
 		<div class="form-group">
-			<label for="password">Password</label>
-			<input type="password" class="form-control" name="password" id="password" placeholder="Password">
+			<label for="password">Contraseña</label>
+			<input type="password" class="form-control" ng-model="modalCreaCuentaCtrl.infoUser.password" id="password" placeholder="Contraseña" required>
 		</div>
 		<!--end form-group-->
 		<div class="form-group">
-			<label for="confirm_password">Confirm Password</label>
-			<input type="password" class="form-control" name="confirm_password" id="confirm_password" placeholder="Confirm Password">
+			<label for="confirm_password">Confirma contraseña</label>
+			<input type="password" class="form-control" ng-model="modalCreaCuentaCtrl.infoUser.cpassword" id="cpassword" placeholder="Confirma contraseña" required>
 		</div>
 		<!--end form-group-->
 		<div class="form-group center">
-			<button type="submit" class="btn btn-primary width-100">Register Now</button>
+			<button type="submit" class="btn btn-primary width-100" ng-disabled="!modalCreaCuentaCtrl.form.$valid" ng-click="modalCreaCuentaCtrl.creaCuentaEmail()">Crear cuenta</button>
+		</div>
+		<!--end form-group-->
+		<div class="form-group center">
+			<button type="button" class="btn btn-primary width-100" ng-click="modalCreaCuentaCtrl.creaCuentaFacebook()">Crear con Facebook</button>
 		</div>
 		<!--end form-group-->
 	</form>
 	
 	<hr>
 	
-	<p class="center note">By clicking on “Register Now” button you are accepting the <a href="terms-and-conditions.html" class="underline">Terms & Conditions</a></p>
+	<p class="center note">Al crear una cuenta estas aceptando nuestros <a href="terms-and-conditions.html" class="underline">Terminos & Condiciones</a></p>
 	<!--end form-->
 </div>
 <!--end modal-body-->

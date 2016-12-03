@@ -20,6 +20,8 @@
 		<link rel="stylesheet" href="bower_components/jssocials/dist/jssocials.css" />
 		<link rel="stylesheet" href="bower_components/jssocials/dist/jssocials-theme-minima.css" />
 		<link rel="stylesheet" href="bower_components/nouislider/distribute/nouislider.min.css" />
+		<link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+		<link rel="stylesheet" href="bower_components/animate.css/animate.css" />
 		<!-- endbower -->
 		<!-- endbuild -->
 		<!-- build:css(.tmp) styles/main.css -->
@@ -27,6 +29,10 @@
 		<!-- endbuild -->
 	</head>
 	<body ng-controller="MainCtrl" class="nav-btn-only homepage">
+		
+		<div loader class="cssload-container" ng-class="{'loader-show': $pageOnLoad}">
+			<div class="cssload-whirlpool"></div>
+		</div>
 		
 		<div class="page-wrapper">
 			
@@ -47,23 +53,31 @@
 		</div>
 		<!--end page-wrapper-->
 		
-		<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
 		<script>
-		(function (A, n, g, u, l, a, r) {
-			A['GoogleAnalyticsObject'] = l;
-			A[l] = A[l] || function () {
-					(A[l].q = A[l].q || []).push(arguments)
-				}, A[l].l = 1 * new Date();
-			a = n.createElement(g),
-				r = n.getElementsByTagName(g)[0];
-			a.async = 1;
-			a.src   = u;
-			r.parentNode.insertBefore(a, r)
-		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+			(function (A, n, g, u, l, a, r) {
+				A['GoogleAnalyticsObject'] = l;
+				A[l] = A[l] || function () {
+						(A[l].q = A[l].q || []).push(arguments)
+					}, A[l].l = 1 * new Date();
+				a = n.createElement(g), r = n.getElementsByTagName(g)[0];
+				a.async = 1;
+				a.src   = u;
+				r.parentNode.insertBefore(a, r)
+			})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+			ga('create', 'UA-88289538-1', 'auto');
+			ga('send', 'pageview');
+		</script>
 		
-		ga('create', 'UA-88289538-1', 'auto');
-		ga('send', 'pageview');
-		
+		<script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+		<script>
+		  var config = {
+			  apiKey           : "AIzaSyANMsDJ035kIDQjyltFdGzWDccPKcAFF8k",
+			  authDomain       : "oco-app.firebaseapp.com",
+			  databaseURL      : "https://oco-app.firebaseio.com",
+			  storageBucket    : "oco-app.appspot.com",
+			  messagingSenderId: "139214206204"
+		  };
+		  firebase.initializeApp(config);
 		</script>
 		
 		<script src="https://use.fontawesome.com/e20efdd9a3.js"></script>
@@ -96,6 +110,10 @@
 		<script src="bower_components/masonry/dist/masonry.pkgd.js"></script>
 		<script src="bower_components/readmore-js/readmore.js"></script>
 		<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+		<script src="bower_components/angularfire/dist/angularfire.js"></script>
+		<script src="bower_components/satellizer/dist/satellizer.js"></script>
+		<script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+		<script src="bower_components/google-maps-utility-library-v3/richmarker/src/richmarker.js"></script>
 		<!-- endbower -->
 		<!-- endbuild -->
 		<!-- build:js scripts/extras.js -->
@@ -111,6 +129,10 @@
 		<script src="scripts/controllers/welcome.js"></script>
 		<script src="scripts/controllers/head.js"></script>
 		<script src="scripts/controllers/footer.js"></script>
+		<script src="scripts/services/authservice.js"></script>
+		<script src="scripts/services/user.js"></script>
+		<script src="scripts/directives/loader.js"></script>
+		<script src="scripts/controllers/place.js"></script>
 		<!-- endbuild -->
 		<script>
 			var _latitude           = 40.7344458;

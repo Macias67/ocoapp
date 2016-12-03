@@ -1,3 +1,7 @@
+//var mapStyles = [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"saturation":36},{"color":"#333333"},{"lightness":40}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"lightness":16}]},{"featureType":"all","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#fefefe"},{"lightness":20}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#fefefe"},{"lightness":17},{"weight":1.2}]},{"featureType":"landscape","elementType":"geometry","stylers":[{"lightness":20},{"color":"#ececec"}]},{"featureType":"landscape.man_made","elementType":"all","stylers":[{"visibility":"on"},{"color":"#f0f0ef"}]},{"featureType":"landscape.man_made","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#f0f0ef"}]},{"featureType":"landscape.man_made","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#d4d4d4"}]},{"featureType":"landscape.natural","elementType":"all","stylers":[{"visibility":"on"},{"color":"#ececec"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"lightness":21},{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#d4d4d4"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#303030"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"saturation":"-100"}]},{"featureType":"poi.attraction","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.government","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.medical","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.park","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#dedede"},{"lightness":21}]},{"featureType":"poi.place_of_worship","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.school","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"poi.school","elementType":"geometry.stroke","stylers":[{"lightness":"-61"},{"gamma":"0.00"},{"visibility":"off"}]},{"featureType":"poi.sports_complex","elementType":"all","stylers":[{"visibility":"on"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"},{"lightness":17}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#ffffff"},{"lightness":29},{"weight":0.2}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":18}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#ffffff"},{"lightness":16}]},{"featureType":"transit","elementType":"geometry","stylers":[{"color":"#f2f2f2"},{"lightness":19}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#dadada"},{"lightness":17}]}];
+//var mapStyles = [{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#d3d3d3"}]},{"featureType":"transit","stylers":[{"color":"#808080"},{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#b3b3b3"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ffffff"},{"weight":1.8}]},{"featureType":"road.local","elementType":"geometry.stroke","stylers":[{"color":"#d7d7d7"}]},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#ebebeb"}]},{"featureType":"administrative","elementType":"geometry","stylers":[{"color":"#a7a7a7"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#efefef"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"color":"#696969"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#737373"}]},{"featureType":"poi","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#d6d6d6"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{},{"featureType":"poi","elementType":"geometry.fill","stylers":[{"color":"#dadada"}]}];
+//var mapStyles = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#dde6e8"},{"visibility":"on"}]}];
+
 var lastClickedMarker;
 
 // Hero Map on Home ----------------------------------------------------------------------------------------------------
@@ -6,6 +10,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 	if (document.getElementById(element) != null) {
 		
 		// Create google map first -------------------------------------------------------------------------------------
+		
 		var map = new google.maps.Map(document.getElementById(element), {
 			zoom       : 14,
 			scrollwheel: false,
@@ -71,6 +76,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				method  : "POST",
 				cache   : false,
 				success : function (results) {
+					//console.log(results);
 					allMarkers = results;
 					placeMarkers(results);
 				},
@@ -103,8 +109,8 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				var markerContent = document.createElement('div');
 				var thumbnailImage;
 				
-				if (markers[i]["gallery"] != undefined) {
-					thumbnailImage = markers[i]["gallery"][0];
+				if (markers[i]["marker_image"] != undefined) {
+					thumbnailImage = markers[i]["marker_image"];
 				}
 				else {
 					thumbnailImage = "assets/img/items/default.png";
@@ -141,13 +147,13 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				
 				// Only Address
 				
-				else if (markers[i]["address"] && markers[i]["latitude"] == undefined && markers[i]["longitude"] == undefined) {
+				else if (markers[i]["address"] && !markers[i]["latitude"] && !markers[i]["longitude"]) {
 					renderRichMarker(i, "address");
 				}
 				
 				// Only Latitude and Longitude
 				
-				else if (markers[i]["latitude"] && markers[i]["longitude"] && markers[i]["address"] == undefined) {
+				else if (markers[i]["latitude"] && markers[i]["longitude"] && !markers[i]["address"]) {
 					renderRichMarker(i, "latitudeLongitude");
 				}
 				
@@ -156,6 +162,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				else {
 					console.log("No location coordinates");
 				}
+				
 			}
 			
 			// Create marker using RichMarker plugin -------------------------------------------------------------------
@@ -193,6 +200,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 					};
 					geocoder.geocode(geoOptions, geocodeCallback(markerContent));
 				}
+				
 			}
 			
 			// Ajax loading of infobox -------------------------------------------------------------------------------------
@@ -348,6 +356,10 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 			
 			google.maps.event.addListener(map, 'idle', function () {
 				renderResults();
+				/*
+				 console.log( map.getBounds().getNorthEast().lat() );
+				 console.log( map.getBounds().getSouthWest().lat() );
+				 */
 			});
 			
 			renderResults();
@@ -417,6 +429,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				});
 				
 			}
+			
 		}
 		
 		$("[data-ajax-response='map']").on("click", function (e) {
@@ -436,6 +449,8 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 					console.log(e);
 				}
 			});
+			
+			
 		});
 		
 		// Geo Location ------------------------------------------------------------------------------------------------
@@ -461,13 +476,17 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 		// Autocomplete
 		
 		autoComplete(map);
+		
+		
 	}
 	else {
 		console.log("No map element");
 	}
 }
 
+
 // Simple map ----------------------------------------------------------------------------------------------------------
+
 function simpleMap(_latitude, _longitude, element, markerDrag, place) {
 	
 	if (!markerDrag) {
@@ -674,7 +693,7 @@ function simpleMap(_latitude, _longitude, element, markerDrag, place) {
 			position : mapCenter,
 			map      : map,
 			draggable: markerDrag,
-			content  : "<img src='assets/img/marker.png'>",
+			content  : "<img src='./images/marker.png'>",
 			flat     : true
 		});
 		google.maps.event.addListener(marker, "dragend", function () {
@@ -685,9 +704,11 @@ function simpleMap(_latitude, _longitude, element, markerDrag, place) {
 		});
 		autoComplete(map, marker);
 	}
+	
 }
 
 //Autocomplete ---------------------------------------------------------------------------------------------------------
+
 function autoComplete(map, marker) {
 	if ($("#address-autocomplete").length) {
 		if (!map) {
