@@ -118,7 +118,6 @@
 		<!-- endbuild -->
 		<!-- build:js scripts/extras.js -->
 		<!-- extras_files:js -->
-		<script src="extras/js/_custom.js"></script>
 		<script src="extras/js/custom.js"></script>
 		<script src="extras/js/maps.js"></script>
 		<!-- endextrasfiles -->
@@ -126,22 +125,14 @@
 		<!-- build:js({.tmp,app}) scripts/scripts.js -->
 		<script src="scripts/app.js"></script>
 		<script src="scripts/states.js"></script>
-		<script src="scripts/controllers/main.js"></script>
-		<script src="scripts/controllers/welcome.js"></script>
-		<script src="scripts/controllers/head.js"></script>
-		<script src="scripts/controllers/footer.js"></script>
+		<script src="scripts/directives/loader.js"></script>
 		<script src="scripts/services/authservice.js"></script>
 		<script src="scripts/services/user.js"></script>
-		<script src="scripts/directives/loader.js"></script>
+		<script src="scripts/controllers/head.js"></script>
+		<script src="scripts/controllers/main.js"></script>
+		<script src="scripts/controllers/welcome.js"></script>
+		<script src="scripts/controllers/footer.js"></script>
 		<script src="scripts/controllers/place.js"></script>
 		<!-- endbuild -->
-		<script>
-			var _latitude           = 40.7344458;
-			var _longitude          = -73.86704922;
-			var element             = "map-homepage";
-			var markerTarget        = "sidebar"; // use "sidebar", "infobox" or "modal" - defines the action after click on marker
-			var sidebarResultTarget = "sidebar"; // use "sidebar", "modal" or "new_page" - defines the action after click on marker
-			heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarget);
-		</script>
 	</body>
 </html>

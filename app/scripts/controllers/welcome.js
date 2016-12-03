@@ -15,12 +15,11 @@ angular.module('ocoApp')
 			vm.ciudad = 'Ocotlán';
 			
 			$timeout(function () {
-				
-			}, 5000);
+				$rootScope.$pageOnLoad = false;
+			}, 2000);
 			
 			$scope.$on('$viewContentLoaded', function () {
 				Custom.init();
-				$rootScope.$pageOnLoad = false;
 			});
 		}
 	]);

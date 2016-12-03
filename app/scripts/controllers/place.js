@@ -9,8 +9,12 @@
  */
 angular.module('ocoApp')
 	.controller('PlaceCtrl', [
-		'$scope', '$rootScope',function ($scope, $rootScope) {
+		'$scope', '$rootScope', '$timeout', function ($scope, $rootScope, $timeout) {
 			var vm    = this;
+			
+			$timeout(function () {
+				$rootScope.$pageOnLoad = false;
+			}, 5000);
 			
 			$scope.$on('$viewContentLoaded', function () {
 				Custom.init();
@@ -22,7 +26,6 @@ angular.module('ocoApp')
 				simpleMap(_latitude,_longitude, element);
 				rating(".visitor-rating");
 				
-				$rootScope.$pageOnLoad = false;
 			});
 		}
 	]);
