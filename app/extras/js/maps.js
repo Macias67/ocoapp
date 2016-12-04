@@ -71,7 +71,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 		
 		google.maps.event.addListenerOnce(map, 'idle', function () {
 			$.ajax({
-				url     : "assets/external/data.php",
+				url     : "http://beta.json-generator.com/api/json/get/Ek1ynn3Mf",
 				dataType: "json",
 				method  : "POST",
 				cache   : false,
@@ -113,7 +113,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 					thumbnailImage = markers[i]["marker_image"];
 				}
 				else {
-					thumbnailImage = "assets/img/items/default.png";
+					thumbnailImage = "images/items/default.png";
 				}
 				
 				if (markers[i]["featured"] == 1) {
@@ -223,7 +223,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 							boxClass              : "infobox-wrapper",
 							enableEventPropagation: true,
 							closeBoxMargin        : "0px 0px -8px 0px",
-							closeBoxURL           : "assets/img/close-btn.png",
+							closeBoxURL           : "images/close-btn.png",
 							infoBoxClearance      : new google.maps.Size(1, 1)
 						};
 						
@@ -325,15 +325,15 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 			
 			// Highlight result in sidebar on marker hover -------------------------------------------------------------
 			
-			$(".marker").live("mouseenter", function () {
+			$(document).on("mouseenter", ".marker", function () {
 				var id = $(this).attr("data-id");
 				$(".results-wrapper .results-content .result-item[data-id=" + id + "] a").addClass("hover-state");
-			}).live("mouseleave", function () {
+			}).on("mouseleave", function () {
 				var id = $(this).attr("data-id");
 				$(".results-wrapper .results-content .result-item[data-id=" + id + "] a").removeClass("hover-state");
 			});
 			
-			$(".marker").live("click", function () {
+			$(document).on("click", ".marker", function () {
 				var id = $(this).attr("data-id");
 				$(lastClickedMarker).removeClass("active");
 				$(this).addClass("active");
@@ -344,7 +344,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 			
 			var clusterStyles = [
 				{
-					url   : 'assets/img/cluster.png',
+					url   : 'images/cluster.png',
 					height: 36,
 					width : 36
 				}
@@ -383,12 +383,12 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				}
 				
 				// Ajax load data for sidebar results after markers are placed
-				
 				$.ajax({
-					url    : "assets/external/sidebar_results.php",
-					method : "POST",
-					data   : {markers: visibleMarkersId},
-					success: function (results) {
+					url     : "http://localhost:9000/views/response/sidebar_result.html",
+					dataType: 'html',
+					method  : "GET",
+					data    : {markers: visibleMarkersId},
+					success : function (results) {
 						resultsArray.push(results); // push the results from php into array
 						$(".results-wrapper .results-content").html(results); // render the new php data into html element
 						$(".results-wrapper .section-title h2 .results-number").html(visibleMarkersId.length); // show the number of results
@@ -427,9 +427,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 						console.log(e);
 					}
 				});
-				
 			}
-			
 		}
 		
 		$("[data-ajax-response='map']").on("click", function (e) {

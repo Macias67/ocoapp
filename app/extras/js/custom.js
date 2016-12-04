@@ -9,23 +9,24 @@ var Custom = function () {
 			
 			//$('head').append( $('<link rel="stylesheet" type="text/css">').attr('href', 'assets/css/rtl.css') );
 			//$("body").addClass("rtl");
-			
-			if ($(".tse-scrollable").length) {
-				$(".tse-scrollable").TrackpadScrollEmulator();
+			var tseScrollable = $(".tse-scrollable");
+			if (tseScrollable.length) {
+				tseScrollable.TrackpadScrollEmulator();
 			}
 			
-			if ($(".date-picker").length) {
-				$(".date-picker").datepicker();
+			var datePicker = $(".date-picker");
+			if (datePicker.length) {
+				datePicker.datepicker();
 			}
 			
 			//heroSectionHeight();
-			
+			var pageHeader = $("#page-header");
 			if (viewport.is('xs')) {
-				$(".map-wrapper").height($(window).height() - $("#page-header").height());
-				$(".has-background").css("min-height", $(window).height() - $("#page-header").height() + "px");
+				$(".map-wrapper").height($(window).height() - pageHeader.height());
+				$(".has-background").css("min-height", $(window).height() - pageHeader.height() + "px");
 			}
 			else {
-				$(".hero-section.full-screen").height($(window).height() - $("#page-header").height());
+				$(".hero-section.full-screen").height($(window).height() - pageHeader.height());
 			}
 			
 			//  Social Share -------------------------------------------------------------------------------------------------------
@@ -35,21 +36,19 @@ var Custom = function () {
 			}
 			
 			//  Count down  --------------------------------------------------------------------------------------------------------
-			
-			if ($(".count-down").length) {
+			var countDown = $(".count-down");
+			if (countDown.length) {
 				
-				
-				var year  = parseInt($(".count-down").attr("data-countdown-year"), 10);
-				var month = parseInt($(".count-down").attr("data-countdown-month"), 10) - 1;
-				var day   = parseInt($(".count-down").attr("data-countdown-day"), 10);
-				$(".count-down").countdown({until: new Date(year, month, day), padZeroes: true, format: 'HMS'});
+				var year  = parseInt(countDown.attr("data-countdown-year"), 10);
+				var month = parseInt(countDown.attr("data-countdown-month"), 10) - 1;
+				var day   = parseInt(countDown.attr("data-countdown-day"), 10);
+				countDown.countdown({until: new Date(year, month, day), padZeroes: true, format: 'HMS'});
 				var date = new Date();
-				$(".count-down").countdown({until: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 2), padZeroes: true, format: 'HMS'});
+				countDown.countdown({until: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 2), padZeroes: true, format: 'HMS'});
 			}
-
+			
 			// Render hero search form ---------------------------------------------------------------------------------------------
 			$("select").on("rendered.bs.select", function () {
-				$('head').append($('<link rel="stylesheet" type="text/css">').attr('href', 'assets/css/bootstrap-select.min.css'));
 				if (!viewport.is('xs')) {
 					$(".search-form.vertical").css("top", ($(".hero-section").height() / 2) - ($(".search-form .wrapper").height() / 2));
 				}
@@ -60,7 +59,7 @@ var Custom = function () {
 				$(".search-form.vertical").css("top", ($(".hero-section").height() / 2) - ($(".search-form .wrapper").height() / 2));
 				trackpadScroll("initialize");
 			}
-
+			
 			//  iCheck -------------------------------------------------------------------------------------------------------------
 			if ($("input[type=checkbox]").length > 0) {
 				$("input").iCheck();
@@ -69,7 +68,7 @@ var Custom = function () {
 			if ($("input[type=radio]").length > 0) {
 				$("input").iCheck();
 			}
-
+			
 			//  Smooth Scroll ------------------------------------------------------------------------------------------------------
 			$('.main-nav a[href^="#"], a[href^="#"].scroll').on('click', function (e) {
 				e.preventDefault();
@@ -81,7 +80,7 @@ var Custom = function () {
 					window.location.hash = target;
 				});
 			});
-
+			
 			//  Modal after click --------------------------------------------------------------------------------------------------
 			$("[data-modal-external-file], .quick-detail").on("click", function (e) {
 				e.preventDefault();
@@ -104,7 +103,7 @@ var Custom = function () {
 					openModal(modalTarget, modalFile);
 				}
 			});
-
+			
 			//  Multiple modal hack ------------------------------------------------------------------------------------------------
 			$(document).on('show.bs.modal', '.modal', function () {
 				var zIndex = 1040 + (10 * $('.modal:visible').length);
@@ -113,7 +112,7 @@ var Custom = function () {
 					$('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
 				}, 0);
 			});
-
+			
 			//  Map in Row listing -------------------------------------------------------------------------------------------------
 			$(".item.item-row").each(function () {
 				var element = "map" + $(this).attr("data-id");
@@ -129,7 +128,7 @@ var Custom = function () {
 				}
 				simpleMap(_latitude, _longitude, element, false, place);
 			});
-
+			
 			//  Close "More" menu on click anywhere on page ------------------------------------------------------------------------
 			$(document).on("click", function (e) {
 				if (e.target.className == "controls-more") {
@@ -143,13 +142,13 @@ var Custom = function () {
 					});
 				}
 			});
-
+			
 			// Mobile navigation button --------------------------------------------------------------------------------------------
 			$(".nav-btn").on("click", function () {
 				$(this).toggleClass("active");
 				$(".primary-nav").toggleClass("show");
 			});
-
+			
 			//  Duplicate desired element ------------------------------------------------------------------------------------------
 			$("body").on("click", ".duplicate", function (e) {
 				e.preventDefault();
@@ -157,17 +156,23 @@ var Custom = function () {
 				var parentElement    = $(duplicateElement)[0].parentElement;
 				$(parentElement).append($(duplicateElement)[0].outerHTML);
 			});
-
+			
 			//  Enable image previews in multi file input --------------------------------------------------------------------------
 			if ($("input[type=file].with-preview").length) {
 				$("input.file-upload-input").MultiFile({
 					list: ".file-upload-previews"
 				});
 			}
-
+			
 			//  No UI Slider -------------------------------------------------------------------------------------------------------
-			if ($('.ui-slider').length > 0) {
-				$('.ui-slider').each(function () {
+			var uiSlider = $('.ui-slider');
+			
+			if (uiSlider.length > 0) {
+				uiSlider.each(function () {
+					if (typeof this.noUiSlider === 'object') {
+						return;
+					}
+					
 					if ($("body").hasClass("rtl")) {
 						var rtl = "rtl";
 					}
@@ -182,11 +187,16 @@ var Custom = function () {
 					else {
 						step = 10;
 					}
-					var sliderElement = $(this).attr('id');
-					var element       = $('#' + sliderElement);
-					var valueMin      = parseInt($(this).attr('data-value-min'));
-					var valueMax      = parseInt($(this).attr('data-value-max'));
-					$(this).noUiSlider({
+					//var sliderElement = $(this).attr('id');
+					//var element       = $('#' + sliderElement);
+					var valueMin = parseInt($(this).attr('data-value-min'));
+					var valueMax = parseInt($(this).attr('data-value-max'));
+					var nodes    = [
+						uiSlider.children('.values').children('.value-min'), // 0
+						uiSlider.children('.values').children('.value-max')  // 1
+					];
+					
+					noUiSlider.create(this, {
 						start    : [valueMin, valueMax],
 						connect  : true,
 						direction: rtl,
@@ -196,23 +206,34 @@ var Custom = function () {
 						},
 						step     : step
 					});
+					
 					if ($(this).attr('data-value-type') == 'price') {
+						
 						if ($(this).attr('data-currency-placement') == 'before') {
-							$(this).Link('lower').to($(this).children('.values').children('.value-min'), null, wNumb({prefix: $(this).attr('data-currency'), decimals: 0, thousand: '.'}));
-							$(this).Link('upper').to($(this).children('.values').children('.value-max'), null, wNumb({prefix: $(this).attr('data-currency'), decimals: 0, thousand: '.'}));
+							
+							this.noUiSlider.on('update', function (values, handle) {
+								nodes[handle].val('$' + parseInt(values[handle]));
+							});
+// 							$(this).Link('lower').to($(this).children('.values').children('.value-min'), null, wNumb({prefix: $(this).attr('data-currency'), decimals: 0, thousand: '.'}));
+// 							$(this).Link('upper').to($(this).children('.values').children('.value-max'), null, wNumb({prefix: $(this).attr('data-currency'), decimals: 0, thousand: '.'}));
 						}
+						
 						else if ($(this).attr('data-currency-placement') == 'after') {
-							$(this).Link('lower').to($(this).children('.values').children('.value-min'), null, wNumb({postfix: $(this).attr('data-currency'), decimals: 0, thousand: ' '}));
-							$(this).Link('upper').to($(this).children('.values').children('.value-max'), null, wNumb({postfix: $(this).attr('data-currency'), decimals: 0, thousand: ' '}));
+							this.noUiSlider.on('update', function (values, handle) {
+								nodes[handle].val('$' + parseInt(values[handle]));
+							});
 						}
+						
 					}
 					else {
-						$(this).Link('lower').to($(this).children('.values').children('.value-min'), null, wNumb({decimals: 0}));
-						$(this).Link('upper').to($(this).children('.values').children('.value-max'), null, wNumb({decimals: 0}));
+						this.noUiSlider.on('update', function (values, handle) {
+							nodes[handle].val('$' + parseInt(values[handle]));
+						});
 					}
+					
 				});
 			}
-
+			
 			//  Calendar
 			if ($(".calendar").length) {
 				var date  = new Date();
@@ -248,7 +269,7 @@ var Custom = function () {
 					startPosition: month
 				});
 			}
-
+			
 			//  Form Validation
 			$(".form-email .btn[type='submit']").on("click", function () {
 				var button = $(this);
@@ -293,13 +314,13 @@ function openModal(target, modalPath) {
 		var _this = $(this);
 		lastModal = _this;
 		$.ajax({
-			url    : "assets/external/" + modalPath,
-			method : "POST",
-			//dataType: "html",
+			//url    : "assets/external/" + modalPath,
+			url     : "http://localhost:9000/views/response/modal_item.html",
+			method  : "GET",
+			dataType: "html",
 			data   : {id: target},
 			success: function (results) {
 				_this.append(results);
-				$('head').append($('<link rel="stylesheet" type="text/css">').attr('href', 'assets/css/bootstrap-select.min.css'));
 				$(".selectpicker").selectpicker();
 				_this.find(".gallery").addClass("owl-carousel");
 				ratingPassive(".modal");
@@ -517,7 +538,7 @@ function equalHeight(container) {
 	if (!viewport.is('xs')) {
 		var currentTallest  = 0,
 		    currentRowStart = 0,
-		    rowDivs         = new Array(),
+		    rowDivs         = [],
 		    $el,
 		    topPosition     = 0;
 		
@@ -641,17 +662,7 @@ function rating(element) {
 // Read more -----------------------------------------------------------------------------------------------------------
 
 function initializeReadMore() {
-	
-	$.ajax({
-		type    : "GET",
-		url     : "assets/js/readmore.min.js",
-		success : readMoreCallBack,
-		dataType: "script",
-		cache   : true
-	});
-	
-	function readMoreCallBack() {
-		var collapseHeight;
+	var collapseHeight;
 		var $readMore = $(".read-more");
 		if ($readMore.attr("data-collapse-height")) {
 			collapseHeight = parseInt($readMore.attr("data-collapse-height"), 10);
@@ -666,6 +677,6 @@ function initializeReadMore() {
 			moreLink       : '<a href="#" class="btn btn-primary btn-xs btn-light-frame btn-framed btn-rounded">More<i class="icon_plus"></i></a>',
 			lessLink       : '<a href="#" class="btn btn-primary btn-xs btn-light-frame btn-framed btn-rounded">Less<i class="icon_minus-06"></i></a>'
 		});
-	}
+	
 }
 

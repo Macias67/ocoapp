@@ -22,13 +22,14 @@
 		<link rel="stylesheet" href="bower_components/nouislider/distribute/nouislider.min.css" />
 		<link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
 		<link rel="stylesheet" href="bower_components/animate.css/animate.css" />
+		<link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css"/>
 		<!-- endbower -->
 		<!-- endbuild -->
 		<!-- build:css(.tmp) styles/main.css -->
 		<link rel="stylesheet" href="styles/main.css">
 		<!-- endbuild -->
 	</head>
-	<body ng-controller="MainCtrl" class="nav-btn-only homepage">
+	<body ng-controller="MainCtrl" class="homepage">
 		
 		<div loader class="cssload-container" ng-class="{'loader-show': $pageOnLoad}">
 			<div class="cssload-whirlpool"></div>
@@ -100,6 +101,7 @@
 		<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 		<script src="bower_components/jssocials/dist/jssocials.js"></script>
 		<script src="bower_components/jquery.countdown/dist/jquery.countdown.js"></script>
+		<script src="bower_components/nouislider/documentation/assets/wNumb.js"></script>
 		<script src="bower_components/nouislider/distribute/nouislider.js"></script>
 		<script src="bower_components/get-size/get-size.js"></script>
 		<script src="bower_components/ev-emitter/ev-emitter.js"></script>
@@ -114,6 +116,8 @@
 		<script src="bower_components/satellizer/dist/satellizer.js"></script>
 		<script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
 		<script src="bower_components/google-maps-utility-library-v3/richmarker/src/richmarker.js"></script>
+		<script src="bower_components/google-maps-utility-library-v3/markerclusterer/src/markerclusterer.js"></script>
+		<script src="bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 		<!-- endbower -->
 		<!-- endbuild -->
 		<!-- build:js scripts/extras.js -->
@@ -128,11 +132,15 @@
 		<script src="scripts/directives/loader.js"></script>
 		<script src="scripts/services/authservice.js"></script>
 		<script src="scripts/services/user.js"></script>
+		<script src="scripts/services/authevents.js"></script>
 		<script src="scripts/controllers/head.js"></script>
 		<script src="scripts/controllers/main.js"></script>
 		<script src="scripts/controllers/welcome.js"></script>
 		<script src="scripts/controllers/footer.js"></script>
 		<script src="scripts/controllers/place.js"></script>
+		<script src="scripts/controllers/listing.js"></script>
+<script src="scripts/controllers/editprofile.js"></script>
+<script src="scripts/controllers/map.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>

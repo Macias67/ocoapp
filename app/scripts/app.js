@@ -17,10 +17,29 @@ var ocoApp = angular.module('ocoApp', [
 	'blockUI'
 ]);
 
+ocoApp.config([
+	'$authProvider', function ($authProvider) {
+		$authProvider.tokenName   = 'token';
+		$authProvider.tokenPrefix = 'fb';
+	}
+]);
+
 ocoApp.run([
-	'$rootScope', '$state',
-	function ($rootScope, $state) {
-		$rootScope.$state = $state; // state to be accessed from view
-		$rootScope.$pageOnLoad = true;
+	'$rootScope', '$state', 'AuthService',
+	function ($rootScope, $state, AuthService) {
+		$rootScope.$state           = $state; // state to be accessed from view
+		$rootScope.$pageOnLoad      = true;
+		$rootScope.$isAuthenticated = AuthService.isAuthenticated();
+		
+		AuthService.firebaseAuth().$onAuthStateChanged(function (user) {
+			if (user) {
+				AuthService.getUser().then(function (usuario) {
+					$rootScope.$usuario = usuario;
+				});
+			}
+			else {
+				$rootScope.$usuario = user;
+			}
+		});
 	}
 ]);

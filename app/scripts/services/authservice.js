@@ -28,6 +28,9 @@ angular.module('ocoApp')
 							admin     : false,
 							providerId: user.providerId
 						}).then(function () {
+							user.getToken().then(function (token) {
+								$auth.setToken(token);
+							});
 							deferred.resolve(user);
 						}).catch(function (error) {
 							deferred.reject(error);
@@ -45,53 +48,52 @@ angular.module('ocoApp')
 			authService.createUserWithFacebook = function () {
 				var deferred = $q.defer();
 				
-				firebaseAuth.$signInWithPopup('facebook').then(function (response) {
+				return firebaseAuth.$signInWithPopup('facebook').then(function (response) {
 					
 					response.user.sendEmailVerification();
 					
-					refUsuarios.child(response.user.uid).set({
+					return refUsuarios.child(response.user.uid).set({
 						admin     : false,
 						providerId: response.credential.provider
 					}).then(function () {
+						response.user.getToken().then(function (token) {
+							$auth.setToken(token);
+						});
 						deferred.resolve(response.user);
-					}).catch(function (error) {
-						deferred.reject(error);
+						
+						return deferred.promise;
 					});
-					
-				}).catch(function (error) {
-					deferred.reject(error);
 				});
 				
-				return deferred.promise;
+				
 			};
 			
 			authService.login = function (credenciales) {
 				
 				var deferred = $q.defer();
 				
-				return firebaseAuth.$signInWithEmailAndPassword(credenciales.email, credenciales.pass).then(function (user) {
+				return firebaseAuth.$signInWithEmailAndPassword(credenciales.email, credenciales.password).then(function (user) {
 					return refUsuarios.child(user.uid).once('value').then(function (snapshot) {
-						if (snapshot.val().admin) {
-							user.getToken().then(function (token) {
-								$auth.setToken(token);
-							});
-							deferred.resolve(user);
-						}
-						else {
-							firebaseAuth.$signOut();
-							deferred.reject({code: 'auth/not-admin', message: 'El usuario no es administrador de negocios.'});
-						}
+						user.getToken().then(function (token) {
+							$auth.setToken(token);
+						});
+						deferred.resolve(user);
+						
 						return deferred.promise;
 					});
 				});
 			};
 			
 			authService.loginFacebook = function () {
+				var deferred = $q.defer();
+				
 				return firebaseAuth.$signInWithPopup('facebook').then(function (response) {
 					response.user.getToken().then(function (token) {
 						$auth.setToken(token);
 					});
-					return response;
+					deferred.resolve(response.user);
+					
+					return deferred.promise;
 				});
 			};
 			
@@ -118,6 +120,9 @@ angular.module('ocoApp')
 			
 			authService.getUser = function () {
 				var user = firebaseAuth.$getAuth();
+				if (!user) {
+					return $q.when(null);
+				}
 				return refUsuarios.child(user.uid).once('value').then(function (snapshot) {
 					User.setUser(user, snapshot.val());
 					return $q.when(User.getUser());
@@ -131,8 +136,8 @@ angular.module('ocoApp')
 			authService.requireSignIn = function () {
 				var defer = $q.defer();
 				return firebaseAuth.$requireSignIn().then(function (user) {
-					return refUsuarios.child(user.uid).once('value').then(function (snapshot) {
-						if (snapshot.val().admin) {
+					return firebase.database().ref('usuarios').child(user.uid).once('value').then(function (snapshot) {
+						if (snapshot.val()) {
 							User.setUser(user, snapshot.val());
 							defer.resolve(User.getUser());
 						}

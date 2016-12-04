@@ -18,13 +18,16 @@
 			<input type="password" class="form-control" ng-model="modalSignInCtrl.credenciales.password" id="password" placeholder="Contraseña" required>
 		</div>
 		<div class="form-group center">
-			<button type="submit" class="btn btn-primary width-100" ng-disabled="!modalSignInCtrl.form.$valid">Entrar</button>
+			<button type="submit" class="btn btn-primary width-100" ng-disabled="!modalSignInCtrl.form.$valid" ng-click="modalSignInCtrl.signIn()">Entrar</button>
+		</div>
+		<div class="form-group center">
+			<button type="button" class="btn btn-primary width-100" ng-click="modalSignInCtrl.signInFacebook()">Iniciar con Facebook</button>
 		</div>
 	</form>
 	
 	<hr>
 	
-<a href="javascript:;" class="text-center" ng-click="modalSignInCtrl.resetPassModal()">
+<a href="javascript:" class="text-center" ng-click="modalSignInCtrl.resetPassModal()">
 		<p>Olvide mi contraseña.</p>
 	</a>
 </div>

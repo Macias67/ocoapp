@@ -8,8 +8,8 @@
  */
 angular.module('ocoApp')
 	.directive('loader', [
-		'$rootScope', '$state', '$timeout',
-		function ($rootScope, $state, $timeout) {
+		'$rootScope', '$state', '$timeout', '$anchorScroll',
+		function ($rootScope, $state, $timeout, $anchorScroll) {
 			return {
 				link: function postLink(scope, element, attrs) {
 					
@@ -18,7 +18,7 @@ angular.module('ocoApp')
 					});
 					
 					$rootScope.$on('$stateChangeSuccess', function (event) {
-					
+						$anchorScroll();
 					});
 					
 					// handle errors

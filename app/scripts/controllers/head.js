@@ -13,10 +13,25 @@ angular.module('ocoApp')
  */
 	.controller('HeadCtrl', [
 		'$scope',
+		'$rootScope',
 		'$uibModal',
-		function ($scope, $uibModal) {
+		'$state',
+		'AuthService',
+		'AUTHEVENTS',
+		function ($scope, $rootScope, $uibModal, $state, AuthService, AUTHEVENTS) {
 			
 			var vm = this;
+			
+			vm.menuUsuario = {
+				miPerfil: function () {
+					
+				},
+				salir   : function () {
+					AuthService.logout().then(function () {
+						$rootScope.$emit(AUTHEVENTS.logoutSuccess);
+					});
+				}
+			};
 			
 			vm.signInModal = function () {
 				$uibModal.open({
@@ -46,12 +61,41 @@ angular.module('ocoApp')
 	 * Modal Inicio de Sesión
 	 */
 	.controller('ModalSignInCtrl', [
+		'$rootScope',
 		'$uibModalInstance',
 		'$uibModal',
-		function ($uibModalInstance, $uibModal) {
+		'AuthService',
+		'AUTHEVENTS',
+		'blockUI',
+		function ($rootScope, $uibModalInstance, $uibModal, AuthService, AUTHEVENTS, blockUI) {
 			var vm = this;
 			
 			vm.credenciales = {};
+			
+			vm.signIn = function () {
+				
+				blockUI.start('Entrando...');
+				
+				AuthService.login(vm.credenciales)
+					.then(function (user) {
+						blockUI.stop();
+						$uibModalInstance.dismiss('cancel');
+						$rootScope.$emit(AUTHEVENTS.loginSuccess, user);
+					})
+					.catch(function (error) {
+						blockUI.stop();
+						$rootScope.$emit(AUTHEVENTS.loginFailed, error);
+					});
+			};
+			
+			vm.signInFacebook = function () {
+				AuthService.loginFacebook().then(function (user) {
+					$uibModalInstance.dismiss('cancel');
+					$rootScope.$emit(AUTHEVENTS.loginSuccess, user);
+				}).catch(function (error) {
+					$rootScope.$emit(AUTHEVENTS.loginFailed, error);
+				});
+			};
 			
 			vm.resetPassModal = function () {
 				$uibModal.open({
@@ -88,35 +132,37 @@ angular.module('ocoApp')
 	 * Modal Crea Cuenta
 	 */
 	.controller('ModalCreaCuentaCtrl', [
+		'$rootScope',
 		'$uibModalInstance',
 		'AuthService',
 		'blockUI',
-		function ($uibModalInstance, AuthService, blockUI) {
+		'AUTHEVENTS',
+		function ($rootScope, $uibModalInstance, AuthService, blockUI, AUTHEVENTS) {
 			var vm = this;
 			
 			vm.infoUser = {};
 			
 			vm.creaCuentaEmail = function () {
-				
 				blockUI.start('Creando cuenta...');
-				
 				AuthService.createUserWithEmailAndPassword(vm.infoUser).then(function (user) {
-					console.info(user);
-					
-					//blockUI.stop();
+					$rootScope.$emit(AUTHEVENTS.loginSuccess, user);
+					blockUI.stop();
 					$uibModalInstance.dismiss('cancel');
-					
 				}).catch(function (error) {
-					console.info(error);
+					blockUI.stop();
+					console.error(error);
 				});
-				
 			};
 			
 			vm.creaCuentaFacebook = function () {
+				blockUI.start('Creando cuenta...');
 				AuthService.createUserWithFacebook().then(function (user) {
-					console.info(user);
+					$rootScope.$emit(AUTHEVENTS.loginSuccess, user);
+					blockUI.stop();
+					$uibModalInstance.dismiss('cancel');
 				}).catch(function (error) {
-					console.info(error);
+					blockUI.stop();
+					console.error(error);
 				});
 			};
 			

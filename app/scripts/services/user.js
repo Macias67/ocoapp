@@ -21,12 +21,6 @@ angular.module('ocoApp')
 			this._user.providerId    = user.providerId;
 			this._user.refreshToken  = user.refreshToken;
 			this._user.uid           = user.uid;
-			
-			// Database
-			this._user.admin      = snapshot.admin;
-			this._user.ciudad     = snapshot.ciudad;
-			this._user.direccion  = snapshot.direccion;
-			this._user.providerId = snapshot.providerId;
 		};
 		
 		this.getUser = function () {

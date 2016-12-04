@@ -1,53 +1,106 @@
-<div class="hero-section has-background height-600px">
-	<div class="wrapper">
-		<div class="inner">
-			<div class="container">
-				<div class="page-title center">
-					<h1>Best Deals in {{welcomeCtrl.ciudad}}</h1>
-					<h2>With Locations you can find the best deals in your location</h2>
+<div class="hero-section full-screen has-map has-sidebar">
+	<div class="map-wrapper">
+		<div class="map" id="map-homepage"></div>
+	</div>
+	<!--end map-wrapper-->
+	<div class="results-wrapper">
+		<div class="form search-form inputs-underline">
+			<form>
+				<div class="section-title">
+					<h2>Search</h2>
 				</div>
-				<!--end page-title-->
+				<div class="form-group">
+					<input type="text" class="form-control" name="keyword" placeholder="Enter keyword">
+				</div>
+				<!--end form-group-->
 				<div class="row">
-					<div class="col-md-10 col-sm-10 col-md-offset-1 col-sm-offset-1">
-						<div class="form search-form horizontal">
-							<form name="welcomeCtrl.formFind" ng-submit="welcomeCtrl.results()">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="¿Qué estas buscando?" ng-model="welcomeCtrl.ciudad" required>
-									<span class="input-group-btn">
-										<button class="btn btn-default" ng-disabled="!welcomeCtrl.formFind.$valid" type="submit">
-											<i class="arrow_right"></i>
-										</button>
-									</span>
-								</div><!-- /input-group -->
-							</form>
-							<!--end form-->
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<select class="form-control selectpicker" name="location">
+								<option value="">Location</option>
+									<option value="1">New York</option>
+									<option value="2">Washington</option>
+									<option value="3">London</option>
+									<option value="4">Paris</option>
+							</select>
 						</div>
-						<!--end search-form-->
+						<!--end form-group-->
 					</div>
-					<!--end col-md-10-->
+					<!--end col-md-6-->
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<select class="form-control selectpicker" name="category">
+								<option value="">Category</option>
+								<option value="1">Restaurant</option>
+								<option value="2">Event</option>
+								<option value="3">Adrenaline</option>
+								<option value="4">Sport</option>
+								<option value="5">Wellness</option>
+								<option value="6">Relax</option>
+							</select>
+						</div>
+						<!--end form-group-->
+					</div>
+					<!--end col-md-6-->
 				</div>
 				<!--end row-->
-			</div>
-			<!--end container-->
+				<div class="row">
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<input type="text" class="form-control date-picker" name="min-price" placeholder="Event Date">
+						</div>
+						<!--end form-group-->
+					</div>
+					<!--end col-md-6-->
+					<div class="col-md-6 col-sm-6">
+						<div class="form-group">
+							<div class="ui-slider" id="price-slider" data-value-min="10" data-value-max="400" data-value-type="price" data-currency="$" data-currency-placement="before">
+								<div class="values clearfix">
+									<input class="value-min" name="value-min[]" readonly>
+									<input class="value-max" name="value-max[]" readonly>
+								</div>
+								<div class="element"></div>
+							</div>
+							<!--end price-slider-->
+						</div>
+					</div>
+					<!--end col-md-6-->
+				</div>
+				<!--end row-->
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary pull-right"><i class="fa fa-search"></i></button>
+				</div>
+				<!--end form-group-->
+			</form>
+			<!--end form-hero-->
 		</div>
-		<!--end inner-->
+		<div class="results">
+			<div class="tse-scrollable">
+				<div class="tse-content">
+					<div class="section-title">
+						<h2>Search Results<span class="results-number"></span></h2>
+					</div>
+					<!--end section-title-->
+					<div class="results-content"></div>
+					<!--end results-content-->
+				</div>
+				<!--end tse-content-->
+			</div>
+			<!--end tse-scrollable-->
+		</div>
+		<!--end results-->
 	</div>
-	<!--end wrapper-->
-	<div class="background-wrapper">
-		<div class="bg-transfer opacity-30"><img src="images/background-01.jpg" alt=""></div>
-		<div class="background-color background-color-black"></div>
-	</div>
-	<!--end background-wrapper-->
+	<!--end results-wrapper-->
 </div>
 <!--end hero-section-->
 
-<section class="block">
+<div class="block">
 	<div class="container">
 		<div class="center">
 			<div class="section-title">
 				<div class="center">
 					<h2>Recent Places</h2>
-					<h3 class="subtitle">Fusce eu mollis dui, varius convallis mauris.</h3>
+					<h3 class="subtitle">Fusce eu mollis dui, varius convallis mauris. Nam dictum id</h3>
 				</div>
 			</div>
 			<!--end section-title-->
@@ -56,7 +109,7 @@
 		<div class="row">
 			<div class="col-md-3 col-sm-3">
 				<div class="item" data-id="1">
-					<a ui-sref="place">
+					<a href="detail.html">
 						<div class="description">
 							<figure>Average Price: $8 - $30</figure>
 							<div class="label label-default">Restaurant</div>
@@ -90,6 +143,7 @@
 			<!--<end col-md-3-->
 			<div class="col-md-3 col-sm-3">
 				<div class="item" data-id="2">
+					<figure class="circle featured sale">-25%</figure>
 					<a href="detail.html">
 						<div class="description">
 							<div class="label label-default">Restaurant</div>
@@ -268,12 +322,10 @@
 		<!--end center-->
 	</div>
 	<!--end container-->
-</section>
+</div>
 <!--end block-->
-
 <div class="container"><hr></div>
-
-<section class="block">
+<div class="block">
 	<div class="container">
 		<div class="section-title">
 			<div class="center">
@@ -426,10 +478,9 @@
 		<!--end categories-list-->
 	</div>
 	<!--end container-->
-</section>
+</div>
 <!--end block-->
-
-<section class="block big-padding">
+<div class="block big-padding">
 	<div class="container">
 		<div class="vertical-aligned-elements">
 			<div class="element width-50">
@@ -437,7 +488,7 @@
 			</div>
 			<!--end element-->
 			<div class="element width-50">
-				<form class="form inputs-underline form-email" id="form-subscribe">
+				<form class="form form-email inputs-underline" id="form-subscribe">
 					<div class="input-group">
 						<input type="text" class="form-control" name="email" placeholder="Your email" required="">
 						<span class="input-group-btn">
@@ -456,10 +507,9 @@
 		<div class="background-color background-color-black opacity-5"></div>
 	</div>
 	<!--end background-wrapper-->
-</section>
+</div>
 <!--end block-->
-
-<section class="block background-is-dark">
+<div class="block background-is-dark">
 	<div class="container">
 		<div class="section-title vertical-aligned-elements">
 			<div class="element">
@@ -760,10 +810,10 @@
 		<div class="background-color background-color-default"></div>
 	</div>
 	<!--end background-wrapper-->
-</section>
+</div>
 <!--end block-->
 
-<section class="block">
+<div class="block">
 	<div class="container">
 		<div class="section-title">
 			<h2>Events Near You</h2>
@@ -820,10 +870,10 @@
 		<!--end background-wrapper-->
 	</div>
 	<!--end container-->
-</section>
+</div>
 <!--end block-->
 
-<section class="block">
+<div class="block">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9 col-sm-9">
@@ -834,6 +884,7 @@
 				<div class="row">
 					<div class="col-md-4 col-sm-4">
 						<div class="item" data-id="2">
+							<figure class="circle featured sale">-12%</figure>
 							<a href="detail.html">
 								<div class="description">
 									<div class="label label-default">Restaurant</div>
@@ -972,10 +1023,9 @@
 		<!--end row-->
 	</div>
 	<!--end container-->
-</section>
+</div>
 <!--end block-->
-
-<section class="block">
+<div class="block">
 	<div class="container">
 		<div class="section-title">
 			<h2>From the Blog</h2>
@@ -1016,7 +1066,7 @@
 		<!--end row-->
 	</div>
 	<!--end container-->
-</section>
+</div>
 <!--end block-->
 
 <div class="container">
@@ -1024,11 +1074,8 @@
 </div>
 <!--end container-->
 
-<section class="block">
+<div class="block">
 	<div class="container">
-		<div class="center section-title opacity-40">
-			<h5>Partners</h5>
-		</div>
 		<div class="logos">
 			<div class="logo">
 				<a href="#"><img src="images/logo-1.png" alt=""></a>
@@ -1049,5 +1096,5 @@
 		<!--/ .logos-->
 	</div>
 	<!--end container-->
-</section>
+</div>
 <!--end block-->
