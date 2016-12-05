@@ -101,10 +101,10 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 		var markerCluster;
 		
 		function placeMarkers(markers) {
-			
+			console.log('inicio placeMarkers');
 			newMarkers = [];
 			for (i = 0; i < markers.length; i++) {
-				
+				console.log('marker no: ' + i);
 				var marker;
 				var markerContent = document.createElement('div');
 				var thumbnailImage;
@@ -119,7 +119,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				if (markers[i]["featured"] == 1) {
 					markerContent.innerHTML =
 						'<div class="marker" data-id="' + markers[i]["id"] + '">' +
-						'<div class="title">' + markers[i]["title"] + '</div>' +
+						'<div class="title">Putos ' + markers[i]["title"] + '</div>' +
 						'<div class="marker-wrapper">' +
 						'<div class="tag"><i class="fa fa-check"></i></div>' +
 						'<div class="pin">' +
@@ -131,7 +131,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				else {
 					markerContent.innerHTML =
 						'<div class="marker" data-id="' + markers[i]["id"] + '">' +
-						'<div class="title">' + markers[i]["title"] + '</div>' +
+						'<div class="title">Perras ' + markers[i]["title"] + '</div>' +
 						'<div class="marker-wrapper">' +
 						'<div class="pin">' +
 						'<div class="image" style="background-image: url(' + thumbnailImage + ');"></div>' +
@@ -142,18 +142,21 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 				// Latitude, Longitude and Address
 				
 				if (markers[i]["latitude"] && markers[i]["longitude"] && markers[i]["address"]) {
+					console.log('Entro a renderRichMarker - Latitude, Longitude and Address');
 					renderRichMarker(i, "latitudeLongitude");
 				}
 				
 				// Only Address
 				
 				else if (markers[i]["address"] && !markers[i]["latitude"] && !markers[i]["longitude"]) {
+					console.log('Entro a renderRichMarker - Only Address');
 					renderRichMarker(i, "address");
 				}
 				
 				// Only Latitude and Longitude
 				
 				else if (markers[i]["latitude"] && markers[i]["longitude"] && !markers[i]["address"]) {
+					console.log('Entro a renderRichMarker - Only Latitude and Longitude');
 					renderRichMarker(i, "latitudeLongitude");
 				}
 				
@@ -169,6 +172,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 			
 			function renderRichMarker(i, method) {
 				if (method == "latitudeLongitude") {
+					console.log('Entro a renderRichMarker - latitudeLongitude');
 					//console.log( map.getBounds().contains( new google.maps.LatLng( markers[i]["latitude"], markers[i]["longitude"] ) ) );
 					marker = new RichMarker({
 						position : new google.maps.LatLng(markers[i]["latitude"], markers[i]["longitude"]),
@@ -190,9 +194,11 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 							}
 						}
 					})(marker, i));
+					console.log('Nuevo marker a newMarkers.', marker);
 					newMarkers.push(marker);
 				}
 				else if (method == "address") {
+					console.log('Entro a renderRichMarker - address');
 					a              = i;
 					var geocoder   = new google.maps.Geocoder();
 					var geoOptions = {
@@ -200,7 +206,6 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 					};
 					geocoder.geocode(geoOptions, geocodeCallback(markerContent));
 				}
-				
 			}
 			
 			// Ajax loading of infobox -------------------------------------------------------------------------------------
@@ -262,6 +267,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 							content  : markerContent,
 							flat     : true
 						});
+						console.log('Nuevo marker a newMarkers dentro de geocodeCallback.', marker);
 						newMarkers.push(marker);
 						renderResults();
 						google.maps.event.addListener(marker, 'click', (function (marker, i) {
@@ -275,7 +281,6 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 								else if (markerTarget == "modal") {
 									openModal($(this.content.firstChild).attr("data-id"), "modal_item.php");
 								}
-								
 							}
 						})(marker, i));
 					}
@@ -367,6 +372,7 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 			// Results in the sidebar ----------------------------------------------------------------------------------
 			
 			function renderResults() {
+				console.log('Entro a renderResults');
 				resultsArray        = [];
 				visibleMarkersId    = [];
 				visibleMarkersOnMap = [];
@@ -423,19 +429,23 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 						});
 						
 					},
-					error  : function (e) {
+					error   : function (e) {
 						console.log(e);
 					}
 				});
 			}
+			
+			
 		}
 		
 		$("[data-ajax-response='map']").on("click", function (e) {
 			e.preventDefault();
+			console.log('se ejecuto esto $("[data-ajax-response=map]").on("click")');
 			markerCluster.clearMarkers();
 			for (var i = 0; i < newMarkers.length; i++) {
 				newMarkers[i].setMap(null);
 			}
+			
 			$.ajax({
 				url     : "assets/external/data_2.php", // Data file or database connection
 				dataType: "json",
@@ -447,8 +457,6 @@ function heroMap(_latitude, _longitude, element, markerTarget, sidebarResultTarg
 					console.log(e);
 				}
 			});
-			
-			
 		});
 		
 		// Geo Location ------------------------------------------------------------------------------------------------

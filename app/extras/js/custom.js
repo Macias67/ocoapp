@@ -387,6 +387,7 @@ function ratingPassive(element) {
 				$(this).find(".stars").append("<figure class='fa fa-star'></figure>")
 			}
 		}
+		
 	});
 }
 

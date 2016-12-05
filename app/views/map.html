@@ -1,6 +1,16 @@
 <div class="hero-section full-screen has-map has-sidebar">
 	<div class="map-wrapper">
-		<div class="map" id="map-homepage"></div>
+		<!--<div class="map" id="map-homepage"></div>-->
+		<ng-map
+			class="map"
+			center="[40.7344458, -73.86704922]"
+			zoom="14"
+			map-type="roadmap"
+			scrollwheel="false"
+			style="{{}}"
+			styles="{{mapCtrl.mapStyles}}"
+			default-style="false">
+		</ng-map>
 	</div>
 	<!--end map-wrapper-->
 	<div class="results-wrapper">
@@ -78,10 +88,46 @@
 			<div class="tse-scrollable">
 				<div class="tse-content">
 					<div class="section-title">
-						<h2>Search Results<span class="results-number"></span></h2>
+						<h2>Search Results {{mapCtrl.places.length}}</h2>
 					</div>
 					<!--end section-title-->
-					<div class="results-content"></div>
+					<div class="results-content" ng-repeat="place in mapCtrl.places">
+						<div class="result-item" data-id="{{place.id}}">
+							<figure class="ribbon" ng-show="place.hasOwnProperty('ribbon')">{{place.ribbon}}</figure>
+							<a ng-href="{{place.url}}">
+								<h3>{{place.title}}</h3>
+								<div class="result-item-detail">
+									
+									<div class="image" ng-show="place.gallery.length != 0" ng-style="{'background-image': place.gallery[0]}">
+										<figure ng-show="place.hasOwnProperty('additional_info')">{{place.additional_info}}</figure>
+										<div class="price" ng-show="place.hasOwnProperty('price')">{{place.price}}</div>
+									</div>
+									
+									<div class="image" ng-show="place.gallery.length == 0" style="background-image: url(images/items/default.png)">
+										<figure ng-show="place.hasOwnProperty('additional_info')">{{place.additional_info}}</figure>
+										<div class="price" ng-show="place.hasOwnProperty('price')">{{place.price}}</div>
+									</div>
+									
+									<div class="description">
+										<h5><i class="fa fa-map-marker"></i>{{place.location}}</h5>
+										<div class="rating-passive" ng-hide="place.rating == ''" data-rating="{{place.rating}}">
+												<span class="stars"></span>
+												<span class="reviews">{{place.reviews_number}}</span>
+										</div>
+										<div class="label label-default" ng-hide="place.category == ''">{{place.category}}</div>
+										<p>{{place.description}}</p>
+									</div>
+									
+								</div>
+							</a>
+							<div class="controls-more">
+								<ul>
+									<li><a href="#" class="add-to-favorites">Add to favorites</a></li>
+									<li><a href="#" class="add-to-watchlist">Add to watchlist</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 					<!--end results-content-->
 				</div>
 				<!--end tse-content-->

@@ -14,7 +14,8 @@ var ocoApp = angular.module('ocoApp', [
 	'ui.bootstrap',
 	'firebase',
 	'satellizer',
-	'blockUI'
+	'blockUI',
+  'ngMap'
 ]);
 
 ocoApp.config([
