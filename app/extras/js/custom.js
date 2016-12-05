@@ -48,6 +48,7 @@ var Custom = function () {
 			}
 			
 			// Render hero search form ---------------------------------------------------------------------------------------------
+			// Evento bootstrap-select rendered.bs.select
 			$("select").on("rendered.bs.select", function () {
 				if (!viewport.is('xs')) {
 					$(".search-form.vertical").css("top", ($(".hero-section").height() / 2) - ($(".search-form .wrapper").height() / 2));

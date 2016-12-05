@@ -1661,7 +1661,7 @@
 .rating-passive {
 	.stars {
 		margin-right: 5px;
-		figure {
+		i {
 			@include opacity(.1);
 			color: #000;
 			font-size: 11px;

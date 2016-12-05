@@ -111,7 +111,14 @@
 									<div class="description">
 										<h5><i class="fa fa-map-marker"></i>{{place.location}}</h5>
 										<div class="rating-passive" ng-hide="place.rating == ''" data-rating="{{place.rating}}">
-												<span class="stars"></span>
+												<span class="stars">
+													<span uib-rating
+													      ng-init="rate = place.rating"
+													      ng-model="rate"
+													      max="5"
+													      read-only="true" state-on="'active glyphicon-star'"
+													      aria-labelledby="default-rating"></span>
+												</span>
 												<span class="reviews">{{place.reviews_number}}</span>
 										</div>
 										<div class="label label-default" ng-hide="place.category == ''">{{place.category}}</div>

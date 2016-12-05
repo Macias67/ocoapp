@@ -84,7 +84,6 @@ angular.module('ocoApp')
 				}).then(function (results) {
 					_places = results.data;
 					placeMarkers(results.data);
-					ratingPassive(".results-wrapper .results");
 				}).catch(function (error) {
 					console.error(error);
 				});
@@ -258,7 +257,9 @@ angular.module('ocoApp')
 						}
 					});
 					console.log(vm.places);
+				//ratingPassive(".results-wrapper .results");
 				}
+				
 				
 			}
 			
